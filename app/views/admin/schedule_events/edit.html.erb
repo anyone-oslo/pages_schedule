@@ -1,0 +1,13 @@
+<%
+	page_title       "Editing schedule event: #{@schedule_event.name}"
+	page_description "Editing schedule event: <em>#{@schedule_event.name}</em>"
+%>
+
+<% sidebar do %>
+	
+<% end %>
+
+<% form_for([:admin, @schedule_event], :html => {:multipart => true}) do |form| %>
+	<%= render :partial => 'schedule_event_form', :locals => {:form => form} %>
+	<p><%= submit_tag "Save" %></p>
+<% end %>
