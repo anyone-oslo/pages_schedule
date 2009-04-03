@@ -64,6 +64,10 @@ class ScheduleEvent < ActiveRecord::Base
 		(self.duration > options[:fuzziness]) ? true : false
 	end
 	
+	def multiple_days?
+		(self.ends_at.beginning_of_day > self.starts_at.beginning_of_day) ? true : false
+	end
+	
 	def link
 		url = self[:link]
 		url = "http://#{url}" unless url =~ /^https?:\/\//
