@@ -32,7 +32,9 @@
 			<% if PagesSchedule.config(:use_ends_at) %>
 				<td><%= smart_time(e.starts_at, :always_include_time => true, :skip_prefix => true) %></td>
 				<td><%= smart_time(e.ends_at, :always_include_time => true, :skip_prefix => true) %></td>
-				<td><%= distance_of_time_in_words e.ends_at, e.starts_at %></td>
+				<td>
+					<%= (e.duration?) ? distance_of_time_in_words(e.ends_at, e.starts_at) : "-" %>
+				</td>
 			<% else %>
 				<td><%= smart_time(e.starts_at, :always_include_time => true, :skip_prefix => true) %></td>
 			<% end %>
