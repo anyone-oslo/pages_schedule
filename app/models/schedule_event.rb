@@ -1,6 +1,6 @@
 class ScheduleEvent < ActiveRecord::Base
 	belongs_to_image :image
-	validates_presence_of :name, :starts_at, :ends_at
+	validates_presence_of :name, :starts_at
 	
 	validate do |schedule_event|
 		if !schedule_event.ends_at || schedule_event.ends_at < schedule_event.starts_at
