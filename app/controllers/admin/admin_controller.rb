@@ -1,4 +1,4 @@
-class Admin::AdminController < ApplicationController
+class Admin::AdminController < PagesCore::AdminController
 
 	# Adds menu items for the pages_schedule plugin
 	def pages_schedule_menu_items
