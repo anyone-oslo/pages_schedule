@@ -1,3 +1,6 @@
+require 'pages_schedule/admin_controller'
+require 'pages_schedule/plugin'
+
 module PagesSchedule
 	def self.config(key, value=nil)
 		key = key.to_s
@@ -5,7 +8,7 @@ module PagesSchedule
 		@@config[key] = value if value != nil
 		@@config[key]
 	end
-	
+
 	# Default options
 	config :module_name, "Schedule"
 	config :use_image,   false
