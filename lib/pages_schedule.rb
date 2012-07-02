@@ -1,4 +1,3 @@
-require 'pages_schedule/admin_controller'
 require 'pages_schedule/plugin'
 
 module PagesSchedule
