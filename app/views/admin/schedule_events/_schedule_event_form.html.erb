@@ -3,12 +3,12 @@
 <%= labelled_field form.text_field(:link, :size => 64), "Link", :errors => @schedule_event.errors[:link] %>
 <%= labelled_field form.datetime_select(:starts_at), "Starts at", :errors => @schedule_event.errors[:starts_at] %>
 <% if PagesSchedule.config(:use_ends_at) %>
-	<%= labelled_field form.datetime_select(:ends_at), "Ends at", :errors => @schedule_event.errors[:ends_at] %>
+  <%= labelled_field form.datetime_select(:ends_at), "Ends at", :errors => @schedule_event.errors[:ends_at] %>
 <% end %>
 <% if PagesSchedule.config(:use_image) %>
-	<% if @schedule_event.image %>
-		<%= dynamic_image_tag @schedule_event.image, :size => '150x' %>
-	<% end %>
-	<%= labelled_field form.file_field(:image), 'Image', :errors => @schedule_event.errors[:image_id] %>
+  <% if @schedule_event.image %>
+    <%= dynamic_image_tag @schedule_event.image, :size => '150x' %>
+  <% end %>
+  <%= labelled_field form.file_field(:image), 'Image', :errors => @schedule_event.errors[:image_id] %>
 <% end %>
 <%= labelled_field form.check_box(:published, :size => 64), "Published", :errors => @schedule_event.errors[:published] %>

@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 module PagesSchedule
   class Plugin < PagesCore::Plugin
     def admin_menu_tabs
