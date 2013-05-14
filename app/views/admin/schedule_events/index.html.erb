@@ -4,7 +4,7 @@
 	page_description_links @years.reverse.map{|y| link_to_unless((y.to_s == @year.to_s),y, admin_schedule_events_by_year_path(:year => y))}.join(link_separator)
 %>
 
-<% sidebar do %>
+<% content_for(:sidebar) do %>
 	<h2>Add event</h2>
 	<p>
 		<%= link_to "Add new event", new_admin_schedule_event_path %>

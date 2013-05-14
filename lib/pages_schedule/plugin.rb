@@ -3,7 +3,7 @@ module PagesSchedule
     def admin_menu_tabs
       [
         :label => PagesSchedule.config(:module_name),
-        :url   => {:controller => 'admin/schedule_events'}
+        :url   => {:controller => 'admin/schedule_events', :action => 'index'}
       ]
     end
   end

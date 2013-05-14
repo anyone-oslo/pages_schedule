@@ -1,3 +1,4 @@
+require 'pages_schedule/engine'
 require 'pages_schedule/plugin'
 
 module PagesSchedule
