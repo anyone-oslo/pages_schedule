@@ -5,7 +5,9 @@
 %>
 
 <% content_for(:sidebar) do %>
-  <h2>Add event</h2>
+  <h2>
+    Add event
+  </h2>
   <p>
     <%= link_to "Add new event", new_admin_schedule_event_path %>
   </p>
@@ -26,25 +28,41 @@
       <th>Published</th>
       <th></th>
     </tr>
-    <% @schedule_events.each do |e| %><tr>
-      <td><strong><%= link_to e.name, admin_schedule_event_path(e) %></strong></td>
-      <td><%= e.location %></td>
-      <% if PagesSchedule.config(:use_ends_at) %>
-        <td><%= smart_time(e.starts_at, :always_include_time => true, :skip_prefix => true) %></td>
-        <td><%= smart_time(e.ends_at, :always_include_time => true, :skip_prefix => true) %></td>
+    <% @schedule_events.each do |e| %>
+      <tr>
         <td>
-          <%= (e.duration?) ? distance_of_time_in_words(e.ends_at, e.starts_at) : "-" %>
+          <strong><%= link_to e.name, admin_schedule_event_path(e) %></strong>
         </td>
-      <% else %>
-        <td><%= smart_time(e.starts_at, :always_include_time => true, :skip_prefix => true) %></td>
-      <% end %>
-      <td>
-        <%= check_box_tag "schedule_event-published-#{e.id}", '1', e.published?, :disabled => true %>
-      </td>
-      <td>
-        <%= link_to "Delete", admin_schedule_event_path(e), :method => :delete, :class => :delete, :confirm => 'Are you sure? There is no undo.' %>
-      </td>
-    </tr><% end %>
+        <td>
+          <%= e.location %>
+        </td>
+        <% if PagesSchedule.config(:use_ends_at) %>
+          <td>
+            <%= l(e.starts_at, format: :short) %>
+          </td>
+          <td>
+            <%= l(e.ends_at, format: :short) %>
+          </td>
+          <td>
+            <%= (e.duration?) ? distance_of_time_in_words(e.ends_at, e.starts_at) : "-" %>
+          </td>
+        <% else %>
+          <td>
+            <%= l(e.starts_at, format: :short) %>
+          </td>
+        <% end %>
+        <td>
+          <%= check_box_tag "schedule_event-published-#{e.id}", '1', e.published?, :disabled => true %>
+        </td>
+        <td>
+          <%= link_to("Delete",
+                      admin_schedule_event_path(e),
+                      :method => :delete,
+                      :class => 'delete',
+                      'data-confirm' => 'Are you sure? There is no undo.') %>
+        </td>
+      </tr>
+    <% end %>
   </table>
 <% else %>
   <div class="content">

@@ -4,6 +4,9 @@ class ScheduleEvent < ActiveRecord::Base
   belongs_to_image :image
   validates_presence_of :name, :starts_at
 
+  scope :sorted, -> { order('starts_at DESC') }
+  scope :published, -> { where(published: true) }
+
   validate do |schedule_event|
     if !schedule_event.ends_at || schedule_event.ends_at < schedule_event.starts_at
       schedule_event.ends_at = schedule_event.starts_at
@@ -15,28 +18,15 @@ class ScheduleEvent < ActiveRecord::Base
       self.find_by_sql('SELECT DISTINCT YEAR(starts_at) AS `starts_at_year` FROM `schedule_events` ORDER BY `starts_at_year` ASC').map{|se| se.starts_at_year}.sort.map(&:to_i)
     end
 
-    def find_by_year(year, options={})
-      find_options = {
-        :conditions => ['YEAR(starts_at) = ?', year],
-        :order      => 'starts_at DESC'
-      }.merge(options)
-      self.find(:all, find_options)
+    def by_year(year)
+      where('starts_at >= ? AND starts_at <=?',
+            DateTime.new(year.to_i).beginning_of_year,
+            DateTime.new(year.to_i).end_of_year)
     end
 
     # Find upcoming events
-    def find_upcoming(options={})
-      find_options = {
-        :conditions => ['published = 1 AND ends_at >= ?', Time.now],
-        :order      => 'starts_at ASC'
-      }.merge(options)
-
-      if find_options.has_key?(:within)
-        find_options[:conditions].first += " AND ends_at <= ?"
-        find_options[:conditions] << (Time.now + find_options[:within])
-        find_options.delete(:within)
-      end
-
-      self.find(:all, find_options)
+    def upcoming
+      where('ends_at >= ?', Time.now)
     end
   end
 
