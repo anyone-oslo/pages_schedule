@@ -8,7 +8,8 @@ class ScheduleEvent < ActiveRecord::Base
   scope :published, -> { where(published: true) }
 
   validate do |schedule_event|
-    if !schedule_event.ends_at || schedule_event.ends_at < schedule_event.starts_at
+    if !PagesSchedule.config(:use_ends_at) ||
+      (!schedule_event.ends_at || schedule_event.ends_at < schedule_event.starts_at)
       schedule_event.ends_at = schedule_event.starts_at
     end
   end
