@@ -1,6 +1,8 @@
 # encoding: utf-8
 
 class ScheduleEvent < ActiveRecord::Base
+  include PagesCore::Sweepable
+
   belongs_to_image :image
   validates_presence_of :name, :starts_at
 
