@@ -10,7 +10,7 @@ class Admin::ScheduleEventsController < Admin::AdminController
     end
   end
   protected     :load_schedule_event
-  before_filter :load_schedule_event, :only => [:show, :edit, :update, :destroy]
+  before_action :load_schedule_event, :only => [:show, :edit, :update, :destroy]
 
 
   def index
