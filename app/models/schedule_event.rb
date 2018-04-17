@@ -18,7 +18,14 @@ class ScheduleEvent < ActiveRecord::Base
 
   class << self
     def years
-      self.find_by_sql('SELECT DISTINCT YEAR(starts_at) AS `starts_at_year` FROM `schedule_events` ORDER BY `starts_at_year` ASC').map{|se| se.starts_at_year}.sort.map(&:to_i)
+      query = if mysql?
+                "SELECT DISTINCT YEAR(starts_at) AS `starts_at_year` " \
+                "FROM `schedule_events`"
+              else
+                "SELECT DISTINCT EXTRACT(year FROM starts_at) AS " \
+                "starts_at_year FROM schedule_events"
+              end
+      find_by_sql(query).map(&:starts_at_year).sort.map(&:to_i)
     end
 
     def by_year(year)
@@ -30,6 +37,10 @@ class ScheduleEvent < ActiveRecord::Base
     # Find upcoming events
     def upcoming
       where('ends_at >= ?', Time.now)
+    end
+
+    def mysql?
+      ActiveRecord::Base.connection.adapter_name.downcase.starts_with?("mysql")
     end
   end
 
