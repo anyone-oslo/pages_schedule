@@ -1,6 +1,6 @@
 # encoding: utf-8
 
-class CreateScheduleEvents < ActiveRecord::Migration
+class CreateScheduleEvents < ActiveRecord::Migration[4.2]
   def self.up
     create_table :schedule_events do |t|
       t.string     :name, :location, :link
