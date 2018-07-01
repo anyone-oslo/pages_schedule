@@ -1,4 +1,5 @@
-# -*- encoding: utf-8 -*-
+# encoding: utf-8
+
 $:.push File.expand_path("../lib", __FILE__)
 require "pages_schedule/version"
 
@@ -20,5 +21,5 @@ Gem::Specification.new do |s|
   s.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
   s.require_paths = ["lib"]
 
-  s.add_dependency "rails", ">= 4.1.0", "< 5.2.0"
+  s.add_dependency "rails", ">= 4.1.0", "<= 5.2.0"
 end
