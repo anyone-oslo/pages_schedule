@@ -3,7 +3,7 @@
 class ScheduleEvent < ActiveRecord::Base
   include PagesCore::Sweepable
 
-  belongs_to_image :image
+  belongs_to_image :image, optional: true
   validates_presence_of :name, :starts_at
 
   scope :sorted, -> { order('starts_at DESC') }
