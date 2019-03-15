@@ -7,7 +7,7 @@ Gem::Specification.new do |s|
   s.name        = "pages_schedule"
   s.version     = PagesSchedule::VERSION
   s.authors     = ["Inge Jørgensen"]
-  s.email       = ["inge@manualdesign.no"]
+  s.email       = ["inge@anyone.no"]
   s.homepage    = ""
   s.summary     = %q{Pages Schedule}
   s.description = %q{Pages Schedule}
@@ -21,5 +21,5 @@ Gem::Specification.new do |s|
   s.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
   s.require_paths = ["lib"]
 
-  s.add_dependency "rails", ">= 4.1.0", "<= 5.2.0"
+  s.add_dependency "rails", "~> 5.0"
 end
