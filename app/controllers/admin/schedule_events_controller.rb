@@ -42,7 +42,7 @@ class Admin::ScheduleEventsController < Admin::AdminController
   end
 
   def update
-    if @schedule_event.update_attributes(schedule_event_params)
+    if @schedule_event.update(schedule_event_params)
       flash[:notice] = "Event was updated"
       redirect_to admin_schedule_events_by_year_url(:year => @schedule_event.year) and return
     else
