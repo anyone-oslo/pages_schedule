@@ -1,8 +1,14 @@
-<%
-  page_title       "Schedule"
-  page_description "Viewing schedule for <em>#{@year}</em>"
-  page_description_links @years.reverse.map{|y| link_to_unless((y.to_s == @year.to_s),y, admin_schedule_events_by_year_path(:year => y))}.join(link_separator)
-%>
+<% content_for :page_title, "Schedule" %>
+<% content_for :page_description, "Viewing schedule for <em>#{@year}</em>".html_safe %>
+
+
+<% content_for :page_description_links do %>
+  <% @years.reverse.map do |y| %>
+    <%= link_to(y,
+                admin_schedule_events_by_year_path(year: y),
+                class: ("current" if y.to_i == @year.to_i)) %>
+  <% end %>
+<% end %>
 
 <% content_for(:sidebar) do %>
   <h2>

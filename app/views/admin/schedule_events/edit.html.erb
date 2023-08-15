@@ -1,7 +1,5 @@
-<%
-  page_title       "Editing schedule event: #{@schedule_event.name}"
-  page_description "Editing schedule event: <em>#{@schedule_event.name}</em>"
-%>
+<% content_for :page_title, "Editing schedule event: #{@schedule_event.name}" %>
+<% content_for :page_description, "Editing schedule event: <em>#{@schedule_event.name}</em>".html_safe %>
 
 <% content_for(:sidebar) do %>
   &nbsp;
